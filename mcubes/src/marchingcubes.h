@@ -22,7 +22,7 @@ void mc_add_vertex(double x1, double y1, double z1, double c2,
 template<typename coord_type, typename vector3, typename formula>
 void marching_cubes(const vector3& lower, const vector3& upper,
     int numx, int numy, int numz, formula f, double isovalue,
-    std::vector<double>& vertices, std::vector<size_t>& polygons)
+    std::vector<double>& vertices, std::vector<std::size_t>& polygons)
 {
     using namespace private_;
 
@@ -35,7 +35,7 @@ void marching_cubes(const vector3& lower, const vector3& upper,
     coord_type dy = (upper[1] - lower[1])/static_cast<coord_type>(numy);
     coord_type dz = (upper[2] - lower[2])/static_cast<coord_type>(numz);
     
-    size_t* shared_indices = new size_t[numx*numy*numz*3];
+    std::size_t* shared_indices = new std::size_t[numx*numy*numz*3];
     const int z3 = numz*3;
     const int yz3 = numy*z3;
     
@@ -66,7 +66,7 @@ void marching_cubes(const vector3& lower, const vector3& upper,
                 // Generate vertices AVOIDING DUPLICATES.
                 
                 int edges = edge_table[cubeindex];
-                std::vector<size_t> indices(12, -1);
+                std::vector<std::size_t> indices(12, -1);
                 if(edges & 0x040)
                 {
                     indices[6] = vertices.size() / 3;
